@@ -8,6 +8,10 @@ Stopwatch.prototype.tick = function () {
   this.elapsedSeconds++;
 };
 
+Stopwatch.prototype.reverse = function () {
+  this.elapsedSeconds--;
+};
+
 Stopwatch.prototype.getTime = function () {
   var seconds = this.elapsedSeconds;
   var secondsPerHour = 3600;
