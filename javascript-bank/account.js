@@ -13,3 +13,13 @@ Account.prototype.deposit = function (amount) {
     return true;
   }
 };
+
+Account.prototype.withdraw = function (amount) {
+  if (!Number.isInteger(amount) || amount <= 0) {
+    return false;
+  } else if (Number.isInteger(amount) && amount > 0) {
+    const withdrawTransaction = new Transaction('withdrawal', amount);
+    this.transactions.push(withdrawTransaction);
+    return true;
+  }
+};
