@@ -23,3 +23,18 @@ Account.prototype.withdraw = function (amount) {
     return true;
   }
 };
+
+Account.prototype.getBalance = function () {
+  let finalBalance = 0;
+  if (this.transactions.length < 1) {
+    return finalBalance;
+  }
+  for (let transIndex = 0; transIndex < this.transactions.length; transIndex++) {
+    if (this.transactions[transIndex].type === 'deposit') {
+      finalBalance += this.transactions[transIndex].amount;
+    } else if (this.transactions[transIndex].type === 'withdrawal') {
+      finalBalance -= this.transactions[transIndex].amount;
+    }
+  }
+  return finalBalance;
+};
