@@ -7,38 +7,48 @@ section.carousel {
   width: 100%;
   height: 100vh;
   background-color: #eee;
-}
-
-section.carousel > .container {
-  width: 50%;
-  margin: auto;
-  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-section.carousel h1 {
+section.carousel > .container {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+section.carousel > .container h1 {
   font-family: Arial, Helvetica, sans-serif;
   color: #0e0e0e;
   font-size: 40px;
 }
 
-.row.cara-images {
-  width: 90%;
-  height: 700px;
+.container.cara-images {
+  height: 550px;
+  border: #0e0e0e solid 3px;
+  border-radius: 3px;
+}
+
+.container.cara-images > .row:first-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.row.cara-images > .col-three-quarter > .image {
+.container.cara-images > .row > .col-three-quarter > .image {
   width: 100%;
   height: 100%;
 }
 
-.row.cara-images > i {
+.container.cara-images i {
   cursor: pointer;
   font-size: 30px;
+  padding: 10px;
+  transition: color 0.25s ease;
+}
+
+.container.cara-images i:active {
+  color: aquamarine;
 }
