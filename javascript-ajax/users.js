@@ -36,10 +36,8 @@ testApi('tofu');
 
 function testApiTwo(ingredient) {
   const xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
-  xhr.open('GET', 'https://api.spoonacular.com/recipes/complexSearch?query=' + ingredient + '&diet=vegan');
+  xhr.open('GET', 'https://api.spoonacular.com/recipes/716429/information?apiKey=633237cc8f324710afa989c4ba9993f0&includeNutrition=true');
   xhr.responseType = 'json';
-  xhr.setRequestHeader('API-Key', '633237cc8f324710afa989c4ba9993f0');
   xhr.addEventListener('load', () => {
     console.log(xhr.status);
     console.log(xhr.response);
