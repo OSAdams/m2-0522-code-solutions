@@ -46,3 +46,5 @@ function testApiTwo(ingredient) {
 }
 
 testApiTwo('pasta');
+
+// Note to self: work on strictly vegan results with API
