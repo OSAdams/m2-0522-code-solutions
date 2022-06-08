@@ -48,3 +48,6 @@ function testApiTwo(ingredient) {
 testApiTwo('pasta');
 
 // Note to self: work on strictly vegan results with API
+
+// set window hash so user can hit back button in browser
+// home icon in header for easy navitation
