@@ -3,8 +3,8 @@ const subtract = require('./subtract');
 const multiply = require('./multiply');
 const divide = require('./divide');
 
-const firstNumber = parseInt(process.argv[2]);
-const secondNumber = parseInt(process.argv[4]);
+const firstNumber = Number(process.argv[2]);
+const secondNumber = Number(process.argv[4]);
 
 function findOperand(string) {
   if (string === 'plus') {
