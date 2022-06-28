@@ -21,6 +21,7 @@ if (keyWord === 'read') {
     const newId = notesObj.nextId;
     if (!process.argv[3]) {
       console.error({ error: 'invalid argument. please input a string' });
+      return;
     }
     notesObj.notes[newId] = process.argv[3];
     notesObj.nextId++;
