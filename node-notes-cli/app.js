@@ -6,7 +6,7 @@ const keyWordLib = ['read', 'create', 'update', 'delete'];
 if (!keyWordLib.includes(keyWord)) {
   console.error({ error: 'invalid command' });
 } else if (keyWordLib.includes(keyWord)) {
-  if (keyWord === keyWordLib[0]) {
+  if (keyWord === 'read') {
     fs.readFile('data.json', 'utf8', (err, data) => {
       if (err) {
         console.error(err);
@@ -16,7 +16,7 @@ if (!keyWordLib.includes(keyWord)) {
         console.log(notesId + ': ' + notesObj.notes[notesId]);
       }
     });
-  } else if (keyWord === keyWordLib[1]) {
+  } else if (keyWord === 'create') {
     fs.readFile('data.json', 'utf8', (err, data) => {
       if (err) {
         console.error(err);
@@ -36,7 +36,7 @@ if (!keyWordLib.includes(keyWord)) {
         }
       });
     });
-  } else if (keyWord === keyWordLib[2]) {
+  } else if (keyWord === 'update') {
     const inputId = process.argv[3];
     fs.readFile('data.json', 'utf8', (err, data) => {
       if (err) {
@@ -65,7 +65,7 @@ if (!keyWordLib.includes(keyWord)) {
         }
       });
     });
-  } else if (keyWord === keyWordLib[3]) {
+  } else if (keyWord === 'delete') {
     const inputId = process.argv[3];
     fs.readFile('data.json', 'utf8', (err, data) => {
       if (err) {
