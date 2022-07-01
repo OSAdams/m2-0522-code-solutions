@@ -34,8 +34,8 @@ if (!keyWordLib.includes(keyWord)) {
         if (err) {
           console.error(err);
         }
+        console.log(`Note ID ${newId} successfully created`);
       });
-      console.log(`Note ID ${newId} successfully created`);
     });
   } else if (keyWord === 'update') {
     const inputId = process.argv[3];
@@ -87,6 +87,7 @@ if (!keyWordLib.includes(keyWord)) {
         if (notesObjId === inputId) {
           delete notesObj.notes[notesObjId];
           console.log(`Note ID ${notesObjId} successfully deleted`);
+          break;
         }
       }
       fs.writeFile('data.json', JSON.stringify(notesObj, null, 2), 'utf8', err => {
