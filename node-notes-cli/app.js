@@ -20,6 +20,7 @@ if (!keyWordLib.includes(keyWord)) {
     fs.readFile('data.json', 'utf8', (err, data) => {
       if (err) {
         console.error(err);
+        return;
       }
       const notesObj = JSON.parse(data);
       const newId = notesObj.nextId;
@@ -29,18 +30,20 @@ if (!keyWordLib.includes(keyWord)) {
       }
       notesObj.notes[newId] = process.argv[3];
       notesObj.nextId++;
-      console.log(`Note ID ${newId} successfully created`);
       fs.writeFile('data.json', JSON.stringify(notesObj, null, 2), 'utf8', err => {
         if (err) {
           console.error(err);
+
         }
       });
+      console.log(`Note ID ${newId} successfully created`);
     });
   } else if (keyWord === 'update') {
     const inputId = process.argv[3];
     fs.readFile('data.json', 'utf8', (err, data) => {
       if (err) {
         console.error(err);
+        return;
       }
       const notesObj = JSON.parse(data);
       if (isNaN(Number(inputId)) || Math.floor(inputId) !== Number(inputId)) {
@@ -57,6 +60,7 @@ if (!keyWordLib.includes(keyWord)) {
         if (notesObjId === inputId) {
           notesObj.notes[notesObjId] = process.argv[4];
           console.log(`Note ID ${notesObjId} successfully updated`);
+          break;
         }
       }
       fs.writeFile('data.json', JSON.stringify(notesObj, null, 2), 'utf8', err => {
@@ -70,6 +74,7 @@ if (!keyWordLib.includes(keyWord)) {
     fs.readFile('data.json', 'utf8', (err, data) => {
       if (err) {
         console.error(err);
+        return;
       }
       const notesObj = JSON.parse(data);
       if (isNaN(Number(inputId)) || Math.floor(inputId) !== Number(inputId)) {
