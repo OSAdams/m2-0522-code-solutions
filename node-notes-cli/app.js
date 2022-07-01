@@ -33,7 +33,6 @@ if (!keyWordLib.includes(keyWord)) {
       fs.writeFile('data.json', JSON.stringify(notesObj, null, 2), 'utf8', err => {
         if (err) {
           console.error(err);
-
         }
       });
       console.log(`Note ID ${newId} successfully created`);
