@@ -19,7 +19,7 @@ app.get('/api/notes/:id', (req, res) => {
     error.error = 'id must be a positive whole integer';
     res.status(400).json(error);
   } else if (!jsonData.notes[req.params.id]) {
-    error.error = 'id does not exist';
+    error.error = `cannot find note with id ${req.params.id}`;
     res.status(404).json(error);
   } else {
     res.status(200).json(jsonData.notes[req.params.id]);
