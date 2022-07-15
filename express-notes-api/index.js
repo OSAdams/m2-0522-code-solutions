@@ -54,7 +54,7 @@ app.post('/api/notes', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
   const error = {};
-  if (Number(req.params.id) < 0 || parseInt(req.params.id) !== Number(req.params.id)) {
+  if (Number(req.params.id) <= 0 || parseInt(req.params.id) !== Number(req.params.id)) {
     error.error = 'id must be a positive whole integer';
     res.status(400).json(error);
   } else if (!jsonData.notes[req.params.id]) {
@@ -76,6 +76,7 @@ app.delete('/api/notes/:id', (req, res) => {
 
 app.put('/api/notes/:id', (req, res) => {
   const error = {};
+  let updatedNote;
   if (Number(req.params.id) < 0 || parseInt(req.params.id) !== Number(req.params.id)) {
     error.error = 'id must be a positive whole integer';
     res.status(400).json(error);
@@ -84,13 +85,14 @@ app.put('/api/notes/:id', (req, res) => {
     res.status(404).json(error);
   } else {
     jsonData.notes[req.params.id].content = req.body.content;
+    updatedNote = jsonData.notes[req.params.id];
     const notes = JSON.stringify(jsonData, null, 2);
     fs.writeFile('data.json', notes, 'utf8', err => {
       if (err) {
         error.error = 'an unexpected error occured';
         res.status(500).json(error);
       } else {
-        res.sendStatus(200);
+        res.status(200).json(updatedNote);
       }
     });
   }
