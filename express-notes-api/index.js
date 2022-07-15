@@ -16,7 +16,7 @@ app.get('/api/notes/', (req, res) => {
 
 app.get('/api/notes/:id', (req, res) => {
   const error = {};
-  if (Number(req.params.id) < 0 || parseInt(req.params.id) !== Number(req.params.id)) {
+  if (Number(req.params.id) <= 0 || parseInt(req.params.id) !== Number(req.params.id)) {
     error.error = 'id must be a positive whole integer';
     res.status(400).json(error);
   } else if (!jsonData.notes[req.params.id]) {
@@ -44,6 +44,7 @@ app.post('/api/notes', (req, res) => {
     fs.writeFile('data.json', jsonString, 'utf8', err => {
       if (err) {
         error.error = 'an unexpected error occured';
+        console.error(err);
         res.status(500).json(error);
       } else {
         res.status(201).json(notes);
@@ -66,6 +67,7 @@ app.delete('/api/notes/:id', (req, res) => {
     fs.writeFile('data.json', notes, 'utf8', err => {
       if (err) {
         error.error = 'an unexpected error occured';
+        console.error(err);
         res.status(500).json(error);
       } else {
         res.sendStatus(204);
@@ -90,6 +92,7 @@ app.put('/api/notes/:id', (req, res) => {
     fs.writeFile('data.json', notes, 'utf8', err => {
       if (err) {
         error.error = 'an unexpected error occured';
+        console.error(err);
         res.status(500).json(error);
       } else {
         res.status(200).json(updatedNote);
