@@ -1,7 +1,3 @@
-SELECT "customerId",
-       "firstName",
-       "lastName",
-       "email",
-       "storeId"
+SELECT "email",
   FROM "customers"
  WHERE "storeId" = 2

@@ -1,5 +1,4 @@
 SELECT "line1",
-       "postalCode",
-       "district"
+       "postalCode"
   FROM "addresses"
  WHERE "district" = 'West Bengali'
