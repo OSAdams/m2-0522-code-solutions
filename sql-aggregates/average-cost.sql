@@ -1,2 +1,2 @@
-SELECT AVG("replacementCost") AS "averageCost"
+SELECT AVG("replacementCost") AS average_cost
   FROM films
