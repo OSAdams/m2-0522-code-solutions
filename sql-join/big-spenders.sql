@@ -1,6 +1,7 @@
  SELECT "firstName",
-        "lastName"
+        "lastName",
+        p.amount AS amount
     FROM "customers"
-    JOIN "payments" USING ("customerId")
+    JOIN "payments" AS p USING ("customerId")
 ORDER BY "amount" DESC
    LIMIT 10;
