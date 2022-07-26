@@ -7,3 +7,11 @@ returnValue.then(message => {
 }, error => {
   console.error(error.message);
 });
+
+/*
+  returnValue.then(message => {
+    console.log(message)
+  }).catch(error => {
+    console(error.message)
+  })
+*/
