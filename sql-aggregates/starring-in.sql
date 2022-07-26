@@ -3,5 +3,7 @@ SELECT name AS genre,
   FROM genres
   JOIN "filmGenre" USING ("genreId")
   JOIN "castMembers" USING ("filmId")
- WHERE "actorId" = 178
+  JOIN actors USING ("actorId")
+ WHERE actors."firstName" = 'Lisa'
+   AND actors."lastName" = 'Monroe'
  GROUP BY name
