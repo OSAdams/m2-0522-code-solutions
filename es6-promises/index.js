@@ -4,6 +4,6 @@ const returnValue = takeAChance('Who Dat');
 
 returnValue.then(message => {
   console.log(message);
-}).catch(error => {
+}, error => {
   console.error(error.message);
 });
