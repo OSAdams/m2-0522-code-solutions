@@ -36,17 +36,18 @@ app.get('/api/grades', (req, res) => {
 app.use(express.json());
 
 app.post('/api/grades', (req, res) => {
-  const error = {};
   const name = req.body.name;
   const course = req.body.course;
   const score = req.body.score;
   if (!name || !score || !course) {
-    error.error = 'Name, course, and score are required';
-    res.status(400).json(error);
+    res.status(400).json({
+      error: 'Name, course, and score are required'
+    });
     return;
   } else if (parseInt(score) !== Number(score) || score > 100 || score < 1) {
-    error.error = 'Score must be a an integer in range of 1 and 100';
-    res.status(400).json(error);
+    res.status(400).json({
+      error: 'Score must be a an integer in range of 1 and 100'
+    });
     return;
   }
   const sql = `
