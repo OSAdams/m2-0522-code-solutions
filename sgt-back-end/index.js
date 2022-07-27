@@ -43,7 +43,7 @@ app.post('api/grades', (req, res) => {
     res.send(400).json({
       error: 'name, score, and course are required'
     });
-  } else if (!Number.isInteger(score) && (score > 100 || score < 1)) {
+  } else if (parseInt(score) !== Number(score) && (score > 100 || score < 1)) {
     res.send(400).json({
       error: 'score must be a postive integer'
     });
