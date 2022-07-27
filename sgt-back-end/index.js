@@ -35,25 +35,35 @@ app.get('/api/grades', (req, res) => {
 
 app.use(express.json());
 
-app.post('api/grades', (req, res) => {
+app.post('/api/grades', (req, res) => {
+  const error = {};
   const name = req.body.name;
-  const score = req.body.score;
   const course = req.body.course;
+  const score = req.body.score;
   if (!name || !score || !course) {
-    res.send(400).json({
-      error: 'name, score, and course are required'
-    });
-  } else if (parseInt(score) !== Number(score) && (score > 100 || score < 1)) {
-    res.send(400).json({
-      error: 'score must be a postive integer'
-    });
+    error.error = 'Name, course, and score are required';
+    res.status(400).json(error);
+    return;
+  } else if (parseInt(score) !== Number(score) || score > 100 || score < 1) {
+    error.error = 'Score must be a an integer in range of 1 and 100';
+    res.status(400).json(error);
+    return;
   }
-  const sql = `INSERT ${req.params.name},
-                      ${req.params.course},
-                      ${req.params.score}
-                 INTO grades`;
-  db.query(sql)
+  const sql = `
+              INSERT INTO grades (name, course, score)
+              VALUES ($1, $2, $3)
+           RETURNING *
+            `;
+  const values = [name, course, score];
+  db.query(sql, values)
     .then(result => {
-
+      const newStudent = result.rows[0];
+      res.status(201).json(newStudent);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occured'
+      });
     });
 });
