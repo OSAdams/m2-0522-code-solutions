@@ -74,19 +74,18 @@ app.put('/api/grades/:gradeId', (req, res) => {
   const course = req.body.course;
   const score = req.body.score;
   const gradeId = req.params.gradeId;
-  if (!name || !course || !score) {
+  if (!gradeId) {
+    res.status(400).json({
+      error: 'gradeId is required'
+    });
+  } else if (!name || !course || !score) {
     res.status(400).json({
       error: 'name, course, and score are required'
     });
     return;
-  } else if (!gradeId || parseInt(gradeId) !== Number(gradeId)) {
+  } else if (parseInt(gradeId) !== Number(gradeId) || score > 100 || score < 1) {
     res.status(400).json({
-      error: 'gradeId must be a positive integer'
-    });
-    return;
-  } else if (parseInt(score) !== Number(score) || score > 100 || score < 1) {
-    res.status(400).json({
-      error: 'score must be an integer in range of 1 and 100'
+      error: 'gradeId must be an integer in the range 1 to 100'
     });
     return;
   }
@@ -116,4 +115,17 @@ app.put('/api/grades/:gradeId', (req, res) => {
         error: 'an unexpected error occured'
       });
     });
+});
+
+/* eslint-disable */
+app.delete('/api/grades/:gradeId', (req, res) => {
+  const gradeId = req.params.gradeId;
+  if (!gradeId) {
+    res.status(400).json({
+      error: 'gradeId is required'
+    })
+    return;
+  } else {
+
+  }
 });
