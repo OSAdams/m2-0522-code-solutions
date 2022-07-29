@@ -124,7 +124,18 @@ app.delete('/api/grades/:gradeId', (req, res) => {
   const values = [gradeId];
   db.query(sql, values)
     .then(result => {
-      const deletedStudnet = result.rows[0]
+      const deletedStudent = result.rows[0]
+      if (!gradeId) {
+        res.status(404).json({
+          error: 'gradeId not found'
+        })
+      }
       res.status(200).json(deletedStudent)
+    })
+    .catch(err => {
+      console.error(new Error(err))
+      res.status(500).json({
+        error: 'an unexpected error occured'
+      })
     })
 });
