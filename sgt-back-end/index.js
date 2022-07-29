@@ -74,11 +74,7 @@ app.put('/api/grades/:gradeId', (req, res) => {
   const course = req.body.course;
   const score = req.body.score;
   const gradeId = req.params.gradeId;
-  if (!gradeId) {
-    res.status(400).json({
-      error: 'gradeId is required'
-    });
-  } else if (!name || !course || !score) {
+  if (!name || !course || !score) {
     res.status(400).json({
       error: 'name, course, and score are required'
     });
@@ -120,12 +116,15 @@ app.put('/api/grades/:gradeId', (req, res) => {
 /* eslint-disable */
 app.delete('/api/grades/:gradeId', (req, res) => {
   const gradeId = req.params.gradeId;
-  if (!gradeId) {
-    res.status(400).json({
-      error: 'gradeId is required'
+  const sql = `
+    DELETE FROM grades
+          WHERE gradeId = $1
+      RETURNING *
+  `
+  const values = [gradeId];
+  db.query(sql, values)
+    .then(result => {
+      const deletedStudnet = result.rows[0]
+      res.status(200).json(deletedStudent)
     })
-    return;
-  } else {
-
-  }
 });
