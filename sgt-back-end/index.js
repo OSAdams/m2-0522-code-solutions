@@ -79,11 +79,15 @@ app.put('/api/grades/:gradeId', (req, res) => {
       error: 'name, course, and score are required'
     });
     return;
-  } else if (parseInt(gradeId) !== Number(gradeId) || score > 100 || score < 1) {
+  } else if (parseInt(score) !== Number(score) || score > 100 || score < 1) {
     res.status(400).json({
-      error: 'gradeId must be an integer in the range 1 to 100'
+      error: 'score must be an integer in the range 1 to 100'
     });
     return;
+  } else if (parseInt(gradeId) !== Number(gradeId) || gradeId < 1) {
+    res.status(400).json({
+      error: 'gradeId must be an integer greater than 0'
+    });
   }
   const sql = `
     UPDATE grades
@@ -113,31 +117,33 @@ app.put('/api/grades/:gradeId', (req, res) => {
     });
 });
 
-/* eslint-disable */
 app.delete('/api/grades/:gradeId', (req, res) => {
   const gradeId = req.params.gradeId;
+  if (!gradeId || gradeId < 1 || parseInt(gradeId) !== Number(gradeId)) {
+    res.status(400).json({
+      error: 'gradeId is required and must be a positive integer'
+    });
+  }
   const sql = `
     DELETE FROM grades
-          WHERE gradeId = $1
+          WHERE "gradeId" = $1
       RETURNING *
-  `
+  `;
   const values = [gradeId];
   db.query(sql, values)
     .then(result => {
-      const deletedStudent = result.rows[0]
+      const deletedStudent = result.rows[0];
       if (!gradeId) {
         res.status(404).json({
           error: 'gradeId not found'
-        })
+        });
       }
-      res.status(200).json(deletedStudent)
+      res.status(204).json(deletedStudent);
     })
     .catch(err => {
-      console.error(new Error(err))
+      console.error(new Error(err));
       res.status(500).json({
         error: 'an unexpected error occured'
-      })
-    })
+      });
+    });
 });
-
-// null
